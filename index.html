@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    // Your Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyApVn8xz5LGl0DmbhMRsWsADCOUf7X-jDM",
+      authDomain: "syfn-member-directory-login.firebaseapp.com",
+      projectId: "syfn-member-directory-login",
+      storageBucket: "syfn-member-directory-login.appspot.com",
+      messagingSenderId: "915931928232",
+      appId: "1:915931928232:web:bb26dfe14cea0b85d1549d",
+      measurementId: "G-0F5B5RL962"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Function to handle login
+    function login() {
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var passkey = "SHARED_PASSKEY"; // Replace with your shared passkey
+
+      if (password === passkey) {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Signed in
+            window.location.href = "https://your-google-site-url"; // Replace with your Google Site URL
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+          });
+      } else {
+        alert("Incorrect passkey");
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="loginForm" onsubmit="login(); return false;">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Passkey" required>
+    <button type="submit">Sign In</button>
+  </form>
+</body>
+</html>
